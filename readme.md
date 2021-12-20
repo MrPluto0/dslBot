@@ -23,7 +23,7 @@
 
 ## 架构图
 
-![架构](.\img\架构.png)
+![架构](http://10.112.112.240:8081/2019211400/dslbot/-/blob/master/img/架构.png)
 
 ## DSL 设计
 
@@ -406,7 +406,7 @@ ws.onopen = (res)=>{
 
 由于服务端webSocketServer监听连接的建立，因此具备多线程，多用户的能力，其通信流程图如下： 
 
-<img src="D:\Document\Codes\Projects\dsl-interpreter\img\socket.png" alt="socket" style="zoom:80%;margin-left:0" />
+<img src="img\socket.png" alt="socket" style="zoom:80%;margin-left:0" />
 
 而在脚本文件设计的对应通信函数为`send(msg)`和`listen(seconds,event)`。
 
@@ -435,7 +435,7 @@ ws.onopen = (res)=>{
 
   注意：当前token检测达到结束时，最后一个符号是否需要计入token中，此处通过state为99和100来区分，并分别处理。
 
-  <img src="D:\Document\Codes\Projects\dsl-interpreter\img\state.png" alt="state" style="margin-left:0" />
+  <img src="img\state.png" alt="state" style="margin-left:0" />
 
 - 语法树 AST
 
