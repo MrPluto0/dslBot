@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>modules/Runner/index.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Judge.html">Judge</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isAlpha">isAlpha</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isBoundary">isBoundary</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isDigit">isDigit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isJump">isJump</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isOperator">isOperator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-Parser-Parser.html">Parser</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processAssign">processAssign</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processAST">processAST</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processBlock">processBlock</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processBranch">processBranch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processCompute">processCompute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processDeclare">processDeclare</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processDetect">processDetect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processExit">processExit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processGoto">processGoto</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processListen">processListen</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processMatch">processMatch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processParams">processParams</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processSend">processSend</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-Runner-Runner.html">Runner</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#backtrace">backtrace</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#outputAST">outputAST</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#prepare">prepare</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#run">run</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runAssign">runAssign</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runBlock">runBlock</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runBranch">runBranch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runDetect">runDetect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runExit">runExit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runFunction">runFunction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runGoto">runGoto</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runListen">runListen</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runMatch">runMatch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runSend">runSend</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#searchVariable">searchVariable</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#syncOuter">syncOuter</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html">Tokenizer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#getTokenType">getTokenType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isAlpha">isAlpha</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isBoundary">isBoundary</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isDigit">isDigit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isJump">isJump</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isOperator">isOperator</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#setTokenType">setTokenType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#tokenizeFile">tokenizeFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#tokenizeLine">tokenizeLine</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html">Stack</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html#all">all</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html#pop">pop</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html#push">push</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html#top">top</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="PreProcessor.html">PreProcessor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PreProcessor.html#backtrace">backtrace</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PreProcessor.html#prepare">prepare</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PreProcessor.html#syncOuter">syncOuter</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Parser.html">Parser</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Parser_error.html">Parser/error</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Runner.html">Runner</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Runner_error.html">Runner/error</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.EmptyVariable">EmptyVariable</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.NotFoundDetect">NotFoundDetect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.NotFoundVariable">NotFoundVariable</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.TypeDismatch">TypeDismatch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.UnexpectedBranch">UnexpectedBranch</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Tokenizer.html">Tokenizer</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Tokenizer_error.html">Tokenizer/error</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer_error.html#.throwUnexpected">throwUnexpected</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-utils_logger.html">utils/logger</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-utils_sleep.html">utils/sleep</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-utils_Stack.html">utils/Stack</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">modules/Runner/index.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* eslint-disable no-unused-expressions */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
+/**
+ * The module parses the file extnamed .token.json to .ast.json
+ * @module Runner
+ */
+
+const fs = require('fs');
+
+const { stdout } = require('../../utils/logger');
+const { ErrorProcess } = require('./error');
+const PreProcessor = require('./preprocess');
+const Stack = require('../../utils/stack');
+const sleep = require('../../utils/sleep');
+
+// split listen time to a splice groups of INTERVAL ms
+const INTERVAL = 500;
+
+/**
+ * Runn the .ast.json file
+ * @extends PreProcessor
+ */
+class Runner extends PreProcessor {
+  Detects = [];
+
+  MessageDB;
+
+  WS;
+
+  /**
+   *
+   * @param {String} filename
+   * @param {String} WS client websocket
+   * @param {Array} MessageDB store the message
+   * @param {Object} outer the outer variables
+   */
+  constructor(filename, WS, MessageDB, outer) {
+    super(JSON.parse(fs.readFileSync(filename)), outer);
+    this.WS = WS;
+    this.MessageDB = MessageDB;
+  }
+
+  /**
+   * output the ast
+   */
+  outputAST() {
+    console.log(this._AST);
+  }
+
+  /**
+   * main function: run
+   */
+  async run() {
+    try {
+      if (this.WS.readyState === this.WS.OPEN) {
+        await this.runBlock(this._AST.body);
+      } else {
+        this.WS.on('open', async () => {
+          await this.runBlock(this._AST.body);
+        });
+      }
+    } catch (error) {
+      if (error.message !== 'exit') {
+        stdout.error(error.message);
+        throw error;
+      }
+      // else
+      // stdout.info("Server disconnected.");
+    }
+  }
+
+  /**
+   * run the block context
+   * @param {Array} block
+   */
+  async runBlock(block) {
+    // prepare the variable and branch
+    this.prepare(block);
+
+    for (const item of block) {
+      switch (item.type) {
+        case 'BranchEvent':
+          // stdout.info("Run Branch %s",item.name.value);
+          await this.runBranch(item.name.value);
+          break;
+        case 'Function':
+          // stdout.info("Run Function %s",item.name);
+          await this.runFunction(item);
+          break;
+        case 'AssignEvent':
+          // stdout.info("Run Assign");
+          await this.runAssign(item);
+          break;
+        default:
+          break;
+      }
+    }
+
+    // go back the last block context
+    this.backtrace();
+  }
+
+  /**
+   * run the branch named "name"
+   * @param {String} name the branch name
+   */
+  async runBranch(name) {
+    for (let i = this._Branch.length - 1; i >= 0; i--) {
+      const item = this._Branch[i];
+      if (item.name.value === name) {
+        await this.runBlock(item.block);
+        return;
+      }
+    }
+    ErrorProcess.UnexpectedBranch(name);
+  }
+
+  /**
+   * run the function (send,listen...)
+   * @param {Object} func
+   */
+  async runFunction(func) {
+    switch (func.name) {
+      case 'send':
+        this.runSend(func.params);
+        break;
+      case 'listen':
+        await this.runListen(func.params);
+        break;
+      case 'detect':
+        await this.runDetect(func.params, func.block);
+        break;
+      case 'match':
+        await this.runMatch(func.params);
+        break;
+      case 'goto':
+        await this.runGoto(func.params);
+        break;
+      case 'exit':
+        this.runExit();
+        break;
+      default:
+        break;
+    }
+  }
+
+  /**
+   * process the postfix expression stack
+   * @param {Object} item
+   */
+  async runAssign(item) {
+    const src = this.searchVariable(item.src.value);
+    const stack = new Stack();
+    for (const op of item.operateStack) {
+      if (op.type === 'Identifier') {
+        stack.push(parseInt(this.searchVariable(op.value).value, 10));
+      } else if (op.type === 'String') {
+        stack.push(op.value);
+      } else if (op.type === 'Numeric') {
+        stack.push(parseInt(op.value, 10));
+      } else {
+        const b = stack.pop();
+        const a = stack.pop();
+        if (a === undefined || b === undefined) {
+          ErrorProcess.NotFoundVariable(op.type);
+        }
+        if (a.type !== b.type) {
+          ErrorProcess.TypeDismatch();
+        }
+        switch (op.type) {
+          case 'ADD':
+            stack.push(a + b);
+            break;
+          case 'SUB':
+            stack.push(a - b);
+            break;
+          case 'MUL':
+            stack.push(a * b);
+            break;
+          case 'DIV':
+            stack.push(a / b);
+            break;
+          default:
+            break;
+        }
+      }
+    }
+
+    if (stack.all().length === 1) {
+      src.value = stack.pop();
+    }
+  }
+
+  /**
+   * the future can encrption the data
+   * @param {Array} params
+   */
+  runSend(params) {
+    let message = params[0].value || params[0].value;
+
+    // process \n
+    message = message.replace(/\\n/g, '\n');
+    // process variable in string
+    const matches = message.match(/\${\w*}/g);
+    if (matches instanceof Array) {
+      for (const match of matches) {
+        const name = match.substr(2, match.length - 3);
+        const { value } = this.searchVariable(name);
+        const reg = new RegExp(`\\\${${name}}`, 'g');
+        message = message.replace(reg, value);
+      }
+    }
+
+    // main: send message
+    // stdout.info("Run Send %s",message);
+    this.WS.send(JSON.stringify({
+      type: 'message',
+      data: message,
+    }));
+    this.MessageDB.push({
+      from: 'server',
+      to: 'client id',
+      content: message,
+    });
+  }
+
+  /**
+   * run listen function
+   * @param {Array} params
+   */
+  async runListen(params) {
+    const seconds = parseInt(params[0].value, 10);
+    const replyName = params[1].value;
+
+    // stdout.info("Run Listen: %d %s",seconds,replyName);
+
+    // search for outer variable
+    const reply = this.searchVariable(replyName);
+    reply.value = '';
+
+    // add listen event
+    this.WS.on('message', (message) => {
+      // stdout.info('server receive: %s', message);
+      const msg = JSON.parse(message);
+      if (msg.type === 'message') {
+        reply.value = msg.data;
+        this.MessageDB.push({
+          from: 'client id',
+          to: 'server',
+          content: msg.data,
+        });
+      }
+    });
+
+    // loop check if get reply in seconds
+    let loops = Math.ceil((seconds * 1000) / INTERVAL);
+    while (loops > 0) {
+      if (reply.value !== '') {
+        return;
+      }
+      // stdout.info("The server is waiting for client reply...");
+      await sleep(INTERVAL);
+      loops--;
+    }
+
+    // if no replt in listen times
+    if (reply.value === '') {
+      this.WS.send(JSON.stringify({
+        type: 'message',
+        data: '暂时中断连接',
+      }));
+      this.runExit();
+    }
+  }
+
+  /**
+   * run detect function
+   * @param {Array} params
+   * @param {Array} block
+   */
+  async runDetect(params, block) {
+    let detector = params[0];
+
+    if (detector.type === 'Identifier') {
+      detector = this.searchVariable(detector.value);
+      if (detector.value === '') {
+        ErrorProcess.EmptyVariable(params[0].value);
+      }
+    }
+    // stdout.info("Run Detect: %s",detector.value);
+
+    this.Detects.push(detector.value);
+    block &amp;&amp; await this.runBlock(block);
+    this.Detects.pop();
+  }
+
+  /**
+   * run match function
+   * @param {Array} params
+   */
+  async runMatch(params) {
+    if (params.length === 1) {
+      return;
+    }
+    const len = this.Detects.length - 1;
+    if (len >= 0) {
+      const detect = this.Detects[len];
+      // "|" can split the msg to several words(tokens)
+      const tokens = params[0].value.split('|');
+      const branchName = params[1].value;
+      for (const token of tokens) {
+        // stdout.info(token,detect);
+        if (detect.includes(token)) {
+          await this.runBranch(branchName);
+          return;
+        }
+      }
+    } else {
+      ErrorProcess.NotFoundDetect();
+    }
+  }
+
+  /**
+   * run function goto: goto the branch named "xxx"
+   * @param {Array} params
+   */
+  async runGoto(params) {
+    const branchName = params[0].value;
+    await this.runBranch(branchName);
+  }
+
+  /**
+   * run function exit
+   */
+  runExit() {
+    this.WS.send(JSON.stringify({
+      type: 'close',
+      data: this.syncOuter(),
+    }));
+    this.WS.close();
+    throw new Error('exit');
+  }
+
+  /**
+   * search variable list for "name"
+   * @param {String} name
+   * @returns {Object}
+   */
+  searchVariable(name) {
+    for (const va of this._Variable) {
+      if (va.name === name) {
+        return va;
+      }
+    }
+    ErrorProcess.NotFoundVariable(name);
+    return null;
+  }
+}
+
+module.exports = Runner;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Mon Dec 20 2021 12:52:29 GMT+0800 (GMT+08:00) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

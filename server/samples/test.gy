@@ -1,0 +1,129 @@
+var reply = ""
+var name = outer, account = outer
+var total = 0,temp = 0
+
+branch("start"){
+    send("你好，${name}，我是机器人——小吃，有什么可以帮到你的吗？\n")
+    send("如果您长时间未回应，我会临时断开连接")
+    send("以下命令，您可输入数字，也可输入关键字")
+    send("1是订单，2是评价\投诉，3是退出")
+    listen(20,reply)
+    detect(reply){
+        match("1|预约|订餐|下单","order")
+        match("2|投诉|评价","feedback")
+        match("3","exit")
+    }
+}
+
+branch("order"){
+    send("有以下食物，输入您要点的食物：")
+    send("0代表返回，1代表牛肉汤，2代表烩面，3代表米线")
+    listen(20,reply)
+    detect(reply){
+        match("0","start")
+        match("1|牛肉汤","beefsoup")
+        match("2|烩面","noodles")
+        match("3|米线","needles")
+    }
+    branch("beefsoup"){
+        temp = 10
+        send("牛肉汤价格为10元，是否确定")
+        send("1代表确定，2代表返回上一步，3返回开始")
+        goto("next")
+    }
+    branch("noodles"){
+        temp = 8
+        send("烩面价格为8元，是否确定")
+        send("1代表确定，2代表返回上一步，3返回开始")
+        goto("next")
+    }
+    branch("needles"){
+        temp = 11
+        send("烩面价格为11元，是否确定")
+        send("1代表确定，2代表返回上一步，3返回开始")
+        goto("next")
+    }
+    branch("next"){
+        listen(20,reply)
+        detect(reply){
+            match("1|是|可以|确定|行","snacks")
+            match("2|返回","order")
+            match("3","start")
+        }
+    }
+}
+
+
+branch("snacks"){
+    total = total + temp
+    temp = 0
+    send("是否需要零嘴")
+    send("0代表不需要，1代表卤蛋，2代表香肠，3代表豆腐干")
+    listen(20,reply)
+    detect(reply){
+        match("0","settle")
+        match("1|卤蛋","egg")
+        match("2|香肠","sausage")
+        match("3|豆腐干","tofu")
+    }
+    branch("egg"){
+        temp = 1
+        send("卤蛋价格为1元，是否确定")
+        send("1代表确定，2代表返回上一步，3返回开始")
+        goto("next")
+    }
+    branch("sausage"){
+        temp = 2
+        send("香肠价格为2元，是否确定")
+        send("1代表确定，2代表返回上一步，3返回开始")
+        goto("next")
+    }
+    branch("tofu"){
+        temp = 1
+        send("豆腐干价格为1元，是否确定")
+        send("1代表确定，2代表返回上一步，3返回开始")
+        goto("next")
+    }
+    branch("next"){
+        listen(20,reply)
+        detect(reply){
+            match("1|是|可以|确定|行","settle")
+            match("2|返回","snacks")
+            match("3","start")
+        }
+    }
+}
+
+branch("settle"){
+    total = total + temp
+    temp = 0
+    send("正在为您结算...")
+    send("您的订单价格共${total}元，您的余额为${account}元，是否支付")
+    send("0为取消，1代表支付")
+    listen(20,reply)
+    detect(reply){
+        match("0","start")
+        match("1","finish")
+        match("","exit")
+    }
+    branch("finish"){
+        account = account - total
+        send("支付成功，您的余额为${account}元")
+        goto("exit")
+    }
+}
+
+branch("feedback"){
+    send("若您有任何意见或看法，请告知我们。")
+    listen(20,reply)
+    detect(reply){
+        match("","exit")
+    }
+    send("已经收到您的建议，感谢您的合作。")
+    goto("start")
+}
+
+branch("exit"){
+    send("欢迎下次光临！")
+    exit()
+}

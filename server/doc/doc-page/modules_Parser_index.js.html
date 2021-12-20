@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>modules/Parser/index.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="Judge.html">Judge</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isAlpha">isAlpha</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isBoundary">isBoundary</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isDigit">isDigit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isJump">isJump</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="Judge.html#isOperator">isOperator</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-Parser-Parser.html">Parser</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processAssign">processAssign</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processAST">processAST</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processBlock">processBlock</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processBranch">processBranch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processCompute">processCompute</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processDeclare">processDeclare</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processDetect">processDetect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processExit">processExit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processGoto">processGoto</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processListen">processListen</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processMatch">processMatch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processParams">processParams</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Parser-Parser.html#processSend">processSend</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-Runner-Runner.html">Runner</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#backtrace">backtrace</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#outputAST">outputAST</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#prepare">prepare</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#run">run</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runAssign">runAssign</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runBlock">runBlock</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runBranch">runBranch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runDetect">runDetect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runExit">runExit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runFunction">runFunction</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runGoto">runGoto</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runListen">runListen</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runMatch">runMatch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#runSend">runSend</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#searchVariable">searchVariable</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner-Runner.html#syncOuter">syncOuter</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html">Tokenizer</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#getTokenType">getTokenType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isAlpha">isAlpha</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isBoundary">isBoundary</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isDigit">isDigit</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isJump">isJump</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#isOperator">isOperator</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#setTokenType">setTokenType</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#tokenizeFile">tokenizeFile</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer-Tokenizer.html#tokenizeLine">tokenizeLine</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html">Stack</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html#all">all</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html#pop">pop</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html#push">push</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-utils_Stack-Stack.html#top">top</a></span></li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="PreProcessor.html">PreProcessor</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PreProcessor.html#backtrace">backtrace</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PreProcessor.html#prepare">prepare</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="PreProcessor.html#syncOuter">syncOuter</a></span></li><li class="nav-heading">Modules</li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Parser.html">Parser</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Parser_error.html">Parser/error</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Runner.html">Runner</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Runner_error.html">Runner/error</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.EmptyVariable">EmptyVariable</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.NotFoundDetect">NotFoundDetect</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.NotFoundVariable">NotFoundVariable</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.TypeDismatch">TypeDismatch</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Runner_error.html#.UnexpectedBranch">UnexpectedBranch</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Tokenizer.html">Tokenizer</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-Tokenizer_error.html">Tokenizer/error</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="module-Tokenizer_error.html#.throwUnexpected">throwUnexpected</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-utils_logger.html">utils/logger</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-utils_sleep.html">utils/sleep</a></span></li><li class="nav-heading"><span class="nav-item-type type-module">M</span><span class="nav-item-name"><a href="module-utils_Stack.html">utils/Stack</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">modules/Parser/index.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* eslint-disable no-plusplus */
+/**
+ * The module parses the file extnamed .token.json to .ast.json
+ * @module Parser
+ */
+const { ErrorProcess } = require('./error');
+const Stack = require('../../utils/stack');
+
+/**
+ * Parser
+ */
+class Parser {
+  #symbolTable = [];
+
+  #AST = {
+    type: 'Script',
+    body: [],
+  };
+
+  /**
+   * @param {Array} symbolTable the same as tokenList
+   */
+  constructor(symbolTable) {
+    this.#symbolTable = symbolTable;
+
+    this.index = 0; // current index of charactor
+    this.block = this.#AST.body; // current block context
+    this.blockList = new Stack([this.#AST.body]); // block list
+    this.stack = new Stack([]); // stack composed of { and }
+  }
+
+  /**
+   * process tokenList to AST
+   * @returns {Array} AST
+   */
+  processAST() {
+    while (this.index &lt; this.#symbolTable.length) {
+      const symbol = this.#symbolTable[this.index];
+      // console.log(symbol);
+      this.index++;
+
+      // just process the head of each line
+      switch (symbol.value) {
+        case 'var':
+          this.processDeclare();
+          break;
+        case 'branch':
+          this.processBranch();
+          break;
+        case 'send':
+          this.processSend();
+          break;
+        case 'listen':
+          this.processListen();
+          break;
+        case 'detect':
+          this.processDetect();
+          break;
+        case 'match':
+          this.processMatch();
+          break;
+        case 'goto':
+          this.processGoto();
+          break;
+        case 'exit':
+          this.processExit();
+          break;
+        case '{':
+        case '}':
+          this.processBlock(symbol);
+          break;
+        default:
+          break;
+      }
+      // process the assign
+      if (symbol.type === 'Identifier') {
+        // console.log(this.#symbolTable[this.index],symbol);
+        this.processAssign(symbol);
+      }
+    }
+    return this.#AST;
+  }
+
+  /**
+   * process a Block, to begin with "symbol"
+   * @param {Object} symbol
+   */
+  processBlock(symbol) {
+    if (symbol.value === '{') {
+      this.stack.push('{');
+      this.blockList.push(this.block);
+      this.block = this.block[this.block.length - 1]?.block;
+    } else if (symbol.value === '}') {
+      if (this.stack.top() === '{') {
+        this.stack.pop();
+        this.block = this.blockList.pop();
+      } else ErrorProcess.Block.throwMatchError();
+    }
+  }
+
+  /**
+   * process the declaration, to begin with "var = xxx"
+   */
+  processDeclare() {
+    const declarations = [];
+    let end = false; // if the declare ended
+    let next = true; // if the next word can be added to declarations
+    while (this.index &lt; this.#symbolTable.length) {
+      const symbol = this.#symbolTable[this.index];
+      const last = declarations.length > 0 ? declarations[declarations.length - 1] : null;
+      switch (symbol.type) {
+        case 'Identifier':
+          if (next) {
+            declarations.push({
+              name: symbol.value,
+            });
+            next = false;
+          } else {
+            end = true;
+          }
+          break;
+        case 'Assign':
+          last.init = {};
+          break;
+        case 'Numeric':
+          ErrorProcess.VariableDeclaration.checkInit(last);
+          last.init = {
+            source: 'inner',
+            type: 'number',
+            value: symbol.value,
+          };
+          break;
+        case 'String':
+          ErrorProcess.VariableDeclaration.checkInit(last);
+          last.init = {
+            source: 'inner',
+            type: 'string',
+            value: symbol.value,
+          };
+          break;
+        case 'Comma':
+          next = true;
+          break;
+        case 'KeyWord':
+          if (symbol.value === 'outer') {
+            ErrorProcess.VariableDeclaration.checkInit(last);
+            last.init = {
+              source: 'outer',
+            };
+          } else {
+            end = true;
+          }
+          break;
+        case 'LeftBrace':
+          this.processBlock(symbol);
+          end = true;
+          break;
+        default:
+          console.log(symbol);
+          ErrorProcess.VariableDeclaration.throwUnknownError();
+          break;
+      }
+      if (end) {
+        this.block.push({
+          type: 'VariableDeclaration',
+          declarations,
+        });
+        return;
+      }
+      this.index++;
+    }
+  }
+
+  /**
+   * process assign, to begin with Identifier
+   * @param {Object} symbol
+   */
+  processAssign(symbol) {
+    if (this.#symbolTable[this.index].type === 'Assign') {
+      this.index++;
+      this.block.push({
+        type: 'AssignEvent',
+        src: symbol,
+        operateStack: this.processCompute(),
+      });
+    }
+  }
+
+  /**
+   * preocess compute operations, from infix to postfix
+   * @returns {Array}OperateStack
+   */
+  processCompute() {
+    const operateStack = new Stack();
+    const tempStack = new Stack();
+    let end = false; let
+      turn = 0;
+    while (!end &amp;&amp; this.index &lt; this.#symbolTable.length) {
+      const symbol = this.#symbolTable[this.index];
+      this.index++;
+      switch (symbol.type) {
+        case 'Identifier':
+        case 'Numeric':
+        case 'String':
+          if (turn === 0) {
+            operateStack.push(symbol);
+            turn = 1;
+          } else {
+            end = true;
+          }
+          break;
+        case 'ADD':
+        case 'SUB':
+        case 'MUL':
+        case 'DIV':
+          if (turn === 1) {
+            while (tempStack.top() &amp;&amp; tempStack.top().type === 'LeftParen') {
+              if ('ADD|SUB'.includes(symbol.type) &amp;&amp; 'ADD|SUB|MUL|DIV'.includes(tempStack.top().type)) { operateStack.push(tempStack.pop()); } else if ('MUL|DIV'.includes(symbol.type) &amp;&amp; 'MUL|DIV'.includes(tempStack.top().type)) { operateStack.push(tempStack.pop()); } else { break; }
+            }
+            tempStack.push(symbol);
+            turn = 0;
+          } else {
+            end = true;
+          }
+          break;
+        case 'LeftParen':
+          tempStack.push(symbol);
+          break;
+        case 'RightParen':
+          while (tempStack.top() &amp;&amp; tempStack.top().type !== 'LeftParen') {
+            operateStack.push(tempStack.pop());
+          }
+          tempStack.pop();
+          break;
+        default:
+          end = true;
+          break;
+      }
+    }
+    this.index--;
+    while (tempStack.top()) {
+      operateStack.push(tempStack.pop());
+    }
+    // console.log(operateStack.all());
+    return operateStack.all();
+  }
+
+  /**
+   * process branch
+   */
+  processBranch() {
+    const name = this.processParams()[0];
+    ErrorProcess.Branch.checkBranchName(name);
+
+    this.block.push({
+      type: 'BranchEvent',
+      name,
+      block: [],
+    });
+  }
+
+  /**
+   * process send
+   */
+  processSend() {
+    this.block.push({
+      type: 'Function',
+      name: 'send',
+      params: this.processParams(),
+    });
+  }
+
+  /**
+   * process listen
+   */
+  processListen() {
+    this.block.push({
+      type: 'Function',
+      name: 'listen',
+      params: this.processParams(),
+    });
+  }
+
+  /**
+   * process detect
+   */
+  processDetect() {
+    this.block.push({
+      type: 'Function',
+      name: 'detect',
+      params: this.processParams(),
+      block: [],
+    });
+  }
+
+  /**
+   * process match
+   */
+  processMatch() {
+    this.block.push({
+      type: 'Function',
+      name: 'match',
+      params: this.processParams(),
+    });
+  }
+
+  /**
+   * process goto
+   */
+  processGoto() {
+    this.block.push({
+      type: 'Function',
+      name: 'goto',
+      params: this.processParams(),
+    });
+  }
+
+  /**
+   * process exit
+   */
+  processExit() {
+    this.block.push({
+      type: 'Function',
+      name: 'exit',
+    });
+  }
+
+  /**
+   * process the params of above functions
+   * @returns {Array}
+   */
+  processParams() {
+    const params = [];
+    let matched;
+    let next = true;
+    while (!matched) {
+      const symbol = this.#symbolTable[this.index];
+      switch (symbol.type) {
+        case 'LeftParen':
+          matched = false;
+          break;
+        case 'RightParen':
+          if (matched === false) matched = true;
+          break;
+        case 'Comma':
+          next = true;
+          break;
+        case 'Numeric':
+        case 'Identifier':
+        case 'String':
+          if (next) params.push(symbol);
+          else ErrorProcess.Function.throwParamsError();
+          next = false;
+          break;
+        default:
+          ErrorProcess.Function.throwUnknownError();
+          break;
+      }
+      this.index++;
+    }
+    return params;
+  }
+}
+
+module.exports = Parser;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Mon Dec 20 2021 12:52:29 GMT+0800 (GMT+08:00) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

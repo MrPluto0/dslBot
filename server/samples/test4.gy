@@ -1,0 +1,7 @@
+var reply = ""
+
+branch("start"){
+  send("你好，我是走马观花")
+  listen(10,reply)
+  exit()
+}

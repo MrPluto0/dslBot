@@ -1,0 +1,11 @@
+var reply = ""
+
+branch("start"){
+    send("你好，我是机器人——小吃，有什么可以帮到你的吗？")
+    listen(5,reply)
+    detect(reply){
+        match("预约|订餐|下单","order")
+        match("投诉|评价","feedback")
+        match("","exit")
+    }
+}

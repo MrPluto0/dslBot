@@ -1,0 +1,6 @@
+var total = 0,temp = 0
+var a = ""
+total = (total + temp) * 3
+a = "message"
+
+send("as${total}d,${temp},${a}")
