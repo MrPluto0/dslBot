@@ -36,7 +36,7 @@ class Runner extends PreProcessor {
    * @param {Array} MessageDB store the message
    * @param {Object} outer the outer variables
    */
-  constructor(filename, WS, MessageDB, outer) {
+  constructor(filename, WS, MessageDB, outer = {}) {
     super(JSON.parse(fs.readFileSync(filename)), outer);
     this.WS = WS;
     this.MessageDB = MessageDB;
@@ -65,9 +65,7 @@ class Runner extends PreProcessor {
       if (error.message !== 'exit') {
         stdout.error(error.message);
         throw error;
-      }
-      // else
-      // stdout.info("Server disconnected.");
+      } else { stdout.info('Server disconnected.'); }
     }
   }
 
@@ -311,7 +309,7 @@ class Runner extends PreProcessor {
       const tokens = params[0].value.split('|');
       const branchName = params[1].value;
       for (const token of tokens) {
-        // stdout.info(token,detect);
+        // stdout.info(token, detect);
         if (detect.includes(token)) {
           await this.runBranch(branchName);
           return;

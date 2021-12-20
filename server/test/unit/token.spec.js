@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 
 const { expect } = require('chai');
-const Judge = require('../modules/Tokenizer/judge');
-const Tokenizer = require('../modules/Tokenizer/index');
+const Judge = require('../../modules/Tokenizer/judge');
+const Tokenizer = require('../../modules/Tokenizer/index');
 
 const judge = new Judge();
 

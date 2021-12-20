@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "unit": "mocha ./test/*.js",
-    "test": "mocha",
+    "test": "mocha --timeout 3000",
+    "unit": "mocha ./test/unit/*.spec.js --timeout 3000",
     "jsdoc": "jsdoc -r -c doc/conf.json -R doc/HOMEPAGE.md"
   },
   "repository": {

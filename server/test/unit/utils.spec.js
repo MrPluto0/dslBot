@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 const { expect } = require('chai');
 
-const { logger } = require('../utils/logger');
-const sleep = require('../utils/sleep');
-const date = require('../utils/date');
+const { logger } = require('../../utils/logger');
+const sleep = require('../../utils/sleep');
+const date = require('../../utils/date');
 
 describe('日志测试', () => {
   // write log
