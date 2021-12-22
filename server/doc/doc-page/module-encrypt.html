@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>modules/Tokenizer/judge.js - Documentation</title>
+    <title>encrypt - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,73 +29,343 @@
 
 <div id="main">
     
-    <h1 class="page-title">modules/Tokenizer/judge.js</h1>
+    <h1 class="page-title">encrypt</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/* eslint-disable class-methods-use-this */
-const TYPE = require('../static/token.json');
+        
+    
+</header>
 
-/**
- * judge the character's type for tokenizer
- */
-class Judge {
-  /**
-   * if val is jump character
-   * @param {String} val
-   * @returns {bool}
-   */
-  isJump(val) {
-    return [undefined, ' ', '\t', '\n', '\r'].includes(val);
-  }
+<article>
+    <div class="container-overview">
+    
+        
 
-  /**
-   * if val is a digit
-   * @param {String} val
-   * @returns {bool}
-   */
-  isDigit(val) {
-    return val >= '0' &amp;&amp; val &lt;= '9';
-  }
+        
+    
+    </div>
 
-  /**
-   * if val is Alpha
-   * @param {String} val
-   * @returns {bool}
-   */
-  isAlpha(val) {
-    return (val >= 'a' &amp;&amp; val &lt;= 'z') || (val >= 'A' &amp;&amp; val &lt;= 'Z');
-  }
+    
 
-  /**
-   * if val is one of the Operator (from static/token.json)
-   * @param {String} val
-   * @returns {bool}
-   */
-  isOperator(val) {
-    return (val in TYPE.Operator);
-  }
+    
 
-  /**
-   * if val is one of the Boundary (from static/token.json)
-   * @param {String} val
-   * @returns {bool}
-   */
-  isBoundary(val) {
-    return (val in TYPE.Boundary);
-  }
-}
+    
 
-module.exports = Judge;
-</code></pre>
-        </article>
-    </section>
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".privateDecrypt"><span class="type-signature">(static) </span>privateDecrypt<span class="signature">(string)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    decrypt the string by privateKey
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_encrypt.js.html">utils/encrypt.js</a>, <a href="utils_encrypt.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>string</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>String</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                going to be decrypted
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id=".publicEncrypt"><span class="type-signature">(static) </span>publicEncrypt<span class="signature">(string)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    encrypt the string by publicKey
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_encrypt.js.html">utils/encrypt.js</a>, <a href="utils_encrypt.js.html#line23">line 23</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>string</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>String</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                going to be encrypted
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+
+    
+</div>
+
+
+
+</div>
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

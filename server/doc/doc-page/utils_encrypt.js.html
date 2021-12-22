@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>modules/Tokenizer/judge.js - Documentation</title>
+    <title>utils/encrypt.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">modules/Tokenizer/judge.js</h1>
+    <h1 class="page-title">utils/encrypt.js</h1>
     
 
     
@@ -39,60 +39,45 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/* eslint-disable class-methods-use-this */
-const TYPE = require('../static/token.json');
+            <pre class="prettyprint source linenums"><code>/* eslint-disable no-multi-str */
+
+// const { JSEncrypt } = require('nodejs-jsencrypt');
+const { JSEncrypt } = require('encryptlong');
+const fs = require('fs');
+const { resolve } = require('path');
+
+// Buffer.toString()
+const pubKey = fs.readFileSync(resolve(__dirname, './static/rsa_1024_pub.pem')).toString();
+
+const privKey = fs.readFileSync(resolve(__dirname, './static/rsa_1024_priv.pem')).toString();
 
 /**
- * judge the character's type for tokenizer
+ * @exports encrypt the string
  */
-class Judge {
-  /**
-   * if val is jump character
-   * @param {String} val
-   * @returns {bool}
-   */
-  isJump(val) {
-    return [undefined, ' ', '\t', '\n', '\r'].includes(val);
-  }
+module.exports = {
 
   /**
-   * if val is a digit
-   * @param {String} val
-   * @returns {bool}
+   * encrypt the string by publicKey
+   * @param {String} string going to be encrypted
+   * @returns
    */
-  isDigit(val) {
-    return val >= '0' &amp;&amp; val &lt;= '9';
-  }
+  publicEncrypt(str) {
+    const encrypt = new JSEncrypt();
+    encrypt.setPublicKey(pubKey);
+    return encrypt.encryptLong(str);
+  },
 
   /**
-   * if val is Alpha
-   * @param {String} val
-   * @returns {bool}
+   * decrypt the string by privateKey
+   * @param {String} string going to be decrypted
+   * @returns
    */
-  isAlpha(val) {
-    return (val >= 'a' &amp;&amp; val &lt;= 'z') || (val >= 'A' &amp;&amp; val &lt;= 'Z');
-  }
-
-  /**
-   * if val is one of the Operator (from static/token.json)
-   * @param {String} val
-   * @returns {bool}
-   */
-  isOperator(val) {
-    return (val in TYPE.Operator);
-  }
-
-  /**
-   * if val is one of the Boundary (from static/token.json)
-   * @param {String} val
-   * @returns {bool}
-   */
-  isBoundary(val) {
-    return (val in TYPE.Boundary);
-  }
-}
-
-module.exports = Judge;
+  privateDecrypt(str) {
+    const encrypt = new JSEncrypt();
+    encrypt.setPrivateKey(privKey);
+    return encrypt.decryptLong(str);
+  },
+};
 </code></pre>
         </article>
     </section>
