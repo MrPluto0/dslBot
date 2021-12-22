@@ -35,4 +35,9 @@ describe('Tokenizer类测试', () => {
     const content = await tokenizer.tokenizeFile();
     expect(content instanceof Array).to.be.equal(true);
   });
+  it('error test', async () => {
+    const tokenizer = new Tokenizer('./samples/errorSamples/test6.gy');
+    const content = await tokenizer.tokenizeFile();
+    expect(content).to.be.equal('Tokenize Error: unexpected character @.');
+  });
 });

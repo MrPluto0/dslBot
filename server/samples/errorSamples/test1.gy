@@ -1,0 +1,7 @@
+goto("123")
+branch("123"){
+  goto("exiter")
+}
+branch("exit"){
+
+}

@@ -30,8 +30,15 @@ class PreProcessor {
         item.declarations.forEach((variable) => {
           const temp = {
             name: variable.name,
-            value: variable.init.value || 0,
+            type: undefined,
+            value: undefined,
           };
+          // if init by some value
+          if ('init' in variable) {
+            temp.value = variable.init.value;
+            temp.type = variable.init.type;
+            if (temp.type === 'Number') { temp.value = parseInt(temp.value, 10); }
+          }
           // if variable's value from outer
           if (variable.init?.source === 'outer') {
             temp.value = this.#outer[variable.name];

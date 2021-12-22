@@ -14,6 +14,7 @@ const { ErrorProcess } = require('./error');
 const PreProcessor = require('./preprocess');
 const Stack = require('../../utils/stack');
 const sleep = require('../../utils/sleep');
+const { privateDecrypt } = require('../../utils/encrypt');
 
 // split listen time to a splice groups of INTERVAL ms
 const INTERVAL = 500;
@@ -64,9 +65,11 @@ class Runner extends PreProcessor {
     } catch (error) {
       if (error.message !== 'exit') {
         stdout.error(error.message);
-        throw error;
-      } else { stdout.info('Server disconnected.'); }
+        return error.message;
+      }
+      stdout.info('Server disconnected.');
     }
+    return null;
   }
 
   /**
@@ -80,11 +83,11 @@ class Runner extends PreProcessor {
     for (const item of block) {
       switch (item.type) {
         case 'BranchEvent':
-          // stdout.info("Run Branch %s",item.name.value);
+          // stdout.info('Run Branch %s', item.name.value);
           await this.runBranch(item.name.value);
           break;
         case 'Function':
-          // stdout.info("Run Function %s",item.name);
+          // stdout.info('Run Function %s', item.name);
           await this.runFunction(item);
           break;
         case 'AssignEvent':
@@ -107,7 +110,11 @@ class Runner extends PreProcessor {
   async runBranch(name) {
     for (let i = this._Branch.length - 1; i >= 0; i--) {
       const item = this._Branch[i];
-      if (item.name.value === name) {
+      if (item.name.type === 'String' && item.name.value === name) {
+        await this.runBlock(item.block);
+        return;
+      } if (item.name.type === 'Identifier'
+        && this.searchVariable(item.name.value).value === name) {
         await this.runBlock(item.block);
         return;
       }
@@ -153,7 +160,7 @@ class Runner extends PreProcessor {
     const stack = new Stack();
     for (const op of item.operateStack) {
       if (op.type === 'Identifier') {
-        stack.push(parseInt(this.searchVariable(op.value).value, 10));
+        stack.push(this.searchVariable(op.value).value);
       } else if (op.type === 'String') {
         stack.push(op.value);
       } else if (op.type === 'Numeric') {
@@ -164,7 +171,7 @@ class Runner extends PreProcessor {
         if (a === undefined || b === undefined) {
           ErrorProcess.NotFoundVariable(op.type);
         }
-        if (a.type !== b.type) {
+        if (typeof a !== typeof b) {
           ErrorProcess.TypeDismatch();
         }
         switch (op.type) {
@@ -240,8 +247,8 @@ class Runner extends PreProcessor {
 
     // add listen event
     this.WS.on('message', (message) => {
-      // stdout.info('server receive: %s', message);
-      const msg = JSON.parse(message);
+      // Buffer.toString() => String || String.toString() => String
+      const msg = JSON.parse(privateDecrypt(message.toString()));
       if (msg.type === 'message') {
         reply.value = msg.data;
         this.MessageDB.push({
@@ -280,15 +287,12 @@ class Runner extends PreProcessor {
    */
   async runDetect(params, block) {
     let detector = params[0];
+    if (detector === undefined) { ErrorProcess.NotFoundDetect(); }
 
-    if (detector.type === 'Identifier') {
+    if (detector?.type === 'Identifier') {
       detector = this.searchVariable(detector.value);
-      if (detector.value === '') {
-        ErrorProcess.EmptyVariable(params[0].value);
-      }
     }
     // stdout.info("Run Detect: %s",detector.value);
-
     this.Detects.push(detector.value);
     block && await this.runBlock(block);
     this.Detects.pop();
@@ -315,8 +319,6 @@ class Runner extends PreProcessor {
           return;
         }
       }
-    } else {
-      ErrorProcess.NotFoundDetect();
     }
   }
 
@@ -349,7 +351,8 @@ class Runner extends PreProcessor {
   searchVariable(name) {
     for (const va of this._Variable) {
       if (va.name === name) {
-        return va;
+        if (va.value !== undefined) return va;
+        ErrorProcess.EmptyVariable(va.name);
       }
     }
     ErrorProcess.NotFoundVariable(name);

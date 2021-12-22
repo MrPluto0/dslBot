@@ -12,6 +12,7 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "core-js": "^3.6.5",
+    "encryptlong": "^3.1.4",
     "quasar": "^2.0.0",
     "vuex": "^4.0.2",
     "ws": "^8.3.0"

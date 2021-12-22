@@ -19,7 +19,6 @@ describe('Parser类测试', () => {
   it('test operate (compute)', async () => {
     const tokenizer = new Tokenizer('./samples/test2.gy');
     const symbolTable = await tokenizer.tokenizeFile();
-    fs.writeFileSync('./samples/test2.token.json', JSON.stringify(symbolTable));
 
     const parser = new Parser(symbolTable);
     const AST = parser.processAST();
@@ -30,7 +29,6 @@ describe('Parser类测试', () => {
   it('test block parse', async () => {
     const tokenizer = new Tokenizer('./samples/test3.gy');
     const symbolTable = await tokenizer.tokenizeFile();
-    fs.writeFileSync('./samples/test3.token.json', JSON.stringify(symbolTable));
 
     const parser = new Parser(symbolTable);
     const AST = parser.processAST();

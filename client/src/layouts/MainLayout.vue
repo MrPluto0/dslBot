@@ -19,7 +19,7 @@
       :breakpoint="690"
     >
       <q-toolbar class="bg-grey-3">
-        <q-avatar class="cursor-pointer">
+        <q-avatar class="cursor-pointer" @click="gotoIndex">
           <img src="https://cdn.quasar.dev/logo-v2/svg/logo.svg" />
         </q-avatar>
         <q-space />
@@ -118,6 +118,10 @@ export default {
           user: encodeURIComponent(JSON.stringify(this.userlist[index])),
         },
       });
+    },
+    gotoIndex() {
+      this.top = true;
+      this.$router.push('/');
     },
   },
 };

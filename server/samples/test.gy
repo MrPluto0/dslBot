@@ -39,7 +39,7 @@ branch("order"){
     }
     branch("needles"){
         temp = 11
-        send("烩面价格为11元，是否确定")
+        send("米线价格为11元，是否确定")
         send("1代表确定，2代表返回上一步，3返回开始")
         goto("next")
     }

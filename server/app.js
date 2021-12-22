@@ -6,6 +6,7 @@ const fs = require('fs');
 
 // self modules
 const { logger, stdout } = require('./utils/logger');
+const { privateDecrypt } = require('./utils/encrypt');
 const Tokenizer = require('./modules/Tokenizer');
 const Parser = require('./modules/Parser');
 const Runner = require('./modules/Runner');
@@ -21,7 +22,6 @@ let ClientsCount = 0;
 async function compile(filename = defaultFileName, ws = null) {
   // the three kinds of path
   const filepath = path.resolve(__dirname, 'samples', `${filename}.gy`);
-  const tokenpath = path.resolve(__dirname, 'samples', `${filename}.token.json`);
   const astpath = path.resolve(__dirname, 'samples', `${filename}.ast.json`);
 
   // if .gy file exists
@@ -32,16 +32,10 @@ async function compile(filename = defaultFileName, ws = null) {
     return false;
   }
 
-  // if .token file exists
-  if (!fs.existsSync(tokenpath)) {
-    const tokenizer = new Tokenizer(filepath);
-    const symbolTable = await tokenizer.tokenizeFile();
-    fs.writeFileSync(tokenpath, JSON.stringify(symbolTable));
-  }
-
   // if .ast file exists
   if (!fs.existsSync(astpath)) {
-    const symbolTable = JSON.parse(fs.readFileSync(tokenpath));
+    const tokenizer = new Tokenizer(filepath);
+    const symbolTable = await tokenizer.tokenizeFile();
     const parser = new Parser(symbolTable);
     const AST = parser.processAST();
     fs.writeFileSync(astpath, JSON.stringify(AST));
@@ -79,10 +73,10 @@ compile().then(() => {
 
     // message event
     ws.on('message', (message) => {
-      stdout.info('ID:%d Server receive: %s', ClientId, message);
+      stdout.info('ID:%d Server receive: %s', ClientId, privateDecrypt(message.toString()));
 
-      const msg = JSON.parse(message);
-      if (msg.type === 'init') {
+      const msg = JSON.parse(privateDecrypt(message.toString()));
+      if (msg?.type === 'init') {
         stdout.info('ID:%d Server init Runner', ClientId);
         firstReply = true;
 

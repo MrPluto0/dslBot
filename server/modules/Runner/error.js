@@ -27,7 +27,7 @@ module.exports.ErrorProcess = {
    * @param {String} name
    */
   EmptyVariable(name) {
-    throw new Error(`Variable Error: The Variable ${name} is empty`);
+    throw new Error(`Variable Error: The Variable ${name} is empty.`);
   },
   /**
    * the type dismatch when assigned

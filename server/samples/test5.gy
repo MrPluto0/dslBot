@@ -1,4 +1,5 @@
 var reply = ""
+var bye = "5211314"
 var total = 0,temp = 0
 
 branch("start"){
@@ -104,6 +105,6 @@ branch("feedback"){
 }
 
 branch("exit"){
-    send("欢迎下次光临！")
+    send("欢迎下次光临！${bye}")
     exit()
 }

@@ -55,6 +55,7 @@ import { onMounted, ref } from 'vue';
 import date from '../utils/date';
 import debounce from '../utils/debounce';
 import throttle from '../utils/throttle';
+import encrypt from '../utils/encrypt';
 
 export default {
   data() {
@@ -129,11 +130,13 @@ export default {
       this.ws.onopen = () => {
         console.log('Open Socket.');
 
-        this.ws.send(JSON.stringify({
-          type: 'init',
-          data: user,
-          script: this.user.script,
-        }));
+        this.ws.send(
+          encrypt.publicEncrypt(JSON.stringify({
+            type: 'init',
+            data: user,
+            script: this.user.script,
+          })),
+        );
 
         this.ws.onmessage = (event) => {
           // console.log(event);
@@ -186,10 +189,16 @@ export default {
         if (this.ws.readyState === this.ws.CLOSED) {
           this.initWS();
         } else {
-          this.ws.send(JSON.stringify({
+          console.log(encrypt.publicEncrypt(JSON.stringify({
             type: 'message',
             data: msg,
-          }));
+          })));
+          this.ws.send(
+            encrypt.publicEncrypt(JSON.stringify({
+              type: 'message',
+              data: msg,
+            })),
+          );
         }
       }
       this.scrollMsg();
@@ -202,8 +211,8 @@ export default {
         const len = this.messageBox.length;
         if (
           len > 0
-            && this.messageBox[len - 1]?.sent === false
-            && this.messageBox[len - 1]?.time === this.time
+          && this.messageBox[len - 1]?.sent === false
+          && this.messageBox[len - 1]?.time === this.time
         ) {
           this.messageBox[len - 1].text.push(msg.data);
         } else {

@@ -5,6 +5,7 @@
  */
 const { ErrorProcess } = require('./error');
 const Stack = require('../../utils/stack');
+const { stdout } = require('../../utils/logger');
 
 /**
  * Parser
@@ -34,49 +35,54 @@ class Parser {
    * @returns {Array} AST
    */
   processAST() {
-    while (this.index < this.#symbolTable.length) {
-      const symbol = this.#symbolTable[this.index];
-      // console.log(symbol);
-      this.index++;
+    try {
+      while (this.index < this.#symbolTable.length) {
+        const symbol = this.#symbolTable[this.index];
+        // console.log(symbol);
+        this.index++;
 
-      // just process the head of each line
-      switch (symbol.value) {
-        case 'var':
-          this.processDeclare();
-          break;
-        case 'branch':
-          this.processBranch();
-          break;
-        case 'send':
-          this.processSend();
-          break;
-        case 'listen':
-          this.processListen();
-          break;
-        case 'detect':
-          this.processDetect();
-          break;
-        case 'match':
-          this.processMatch();
-          break;
-        case 'goto':
-          this.processGoto();
-          break;
-        case 'exit':
-          this.processExit();
-          break;
-        case '{':
-        case '}':
-          this.processBlock(symbol);
-          break;
-        default:
-          break;
+        // just process the head of each line
+        switch (symbol.value) {
+          case 'var':
+            this.processDeclare();
+            break;
+          case 'branch':
+            this.processBranch();
+            break;
+          case 'send':
+            this.processSend();
+            break;
+          case 'listen':
+            this.processListen();
+            break;
+          case 'detect':
+            this.processDetect();
+            break;
+          case 'match':
+            this.processMatch();
+            break;
+          case 'goto':
+            this.processGoto();
+            break;
+          case 'exit':
+            this.processExit();
+            break;
+          case '{':
+          case '}':
+            this.processBlock(symbol);
+            break;
+          default:
+            break;
+        }
+        // process the assign
+        if (symbol.type === 'Identifier') {
+          // console.log(this.#symbolTable[this.index],symbol);
+          this.processAssign(symbol);
+        }
       }
-      // process the assign
-      if (symbol.type === 'Identifier') {
-        // console.log(this.#symbolTable[this.index],symbol);
-        this.processAssign(symbol);
-      }
+    } catch (e) {
+      stdout.error(e.message);
+      console.log(e);
     }
     return this.#AST;
   }
@@ -126,7 +132,7 @@ class Parser {
           ErrorProcess.VariableDeclaration.checkInit(last);
           last.init = {
             source: 'inner',
-            type: 'number',
+            type: 'Number',
             value: symbol.value,
           };
           break;
@@ -134,7 +140,7 @@ class Parser {
           ErrorProcess.VariableDeclaration.checkInit(last);
           last.init = {
             source: 'inner',
-            type: 'string',
+            type: 'String',
             value: symbol.value,
           };
           break;
@@ -237,7 +243,7 @@ class Parser {
           break;
       }
     }
-    this.index--;
+    if (this.index < this.#symbolTable.length) { this.index--; }
     while (tempStack.top()) {
       operateStack.push(tempStack.pop());
     }
@@ -333,7 +339,7 @@ class Parser {
     const params = [];
     let matched;
     let next = true;
-    while (!matched) {
+    while (!matched && this.index < this.#symbolTable.length) {
       const symbol = this.#symbolTable[this.index];
       switch (symbol.type) {
         case 'LeftParen':

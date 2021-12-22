@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha --timeout 3000",
-    "unit": "mocha ./test/unit/*.spec.js --timeout 3000",
+    "test": "mocha --timeout 5000",
+    "unit": "mocha --recursive --timeout 5000",
+    "coverage": "nyc npm run unit",
     "jsdoc": "jsdoc -r -c doc/conf.json -R doc/HOMEPAGE.md"
   },
   "repository": {
@@ -15,6 +16,7 @@
   },
   "dependencies": {
     "chai": "^4.3.4",
+    "encryptlong": "^3.1.4",
     "log4js": "^6.3.0",
     "mocha": "^9.1.3",
     "ws": "^8.3.0"
@@ -24,7 +26,8 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
     "jsdoc": "^3.6.7",
-    "minami": "^1.2.3"
+    "minami": "^1.2.3",
+    "nyc": "^15.1.0"
   },
   "nodemonConfig": {
     "ignore": [

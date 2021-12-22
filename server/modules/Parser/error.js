@@ -20,7 +20,7 @@ module.exports.ErrorProcess = {
    */
   Branch: {
     checkBranchName(symbol) {
-      if (symbol && symbol.type === 'String') { return; }
+      if (symbol && (symbol.type === 'String' || symbol.type === 'Identifier')) { return; }
       throw new Error("Branch Error: Can't find branch name.");
     },
   },

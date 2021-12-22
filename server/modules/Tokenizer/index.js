@@ -14,6 +14,7 @@ const fs = require('fs');
 const Judge = require('./judge');
 const TYPE = require('../static/token.json');
 const { ErrorProcess } = require('./error');
+const { stdout } = require('../../utils/logger');
 
 /**
  * @class
@@ -39,18 +40,22 @@ class Tokenizer extends Judge {
    * @description readFile and tokenize
    */
   async tokenizeFile() {
-    const fileStream = fs.createReadStream(this.#filename);
+    try {
+      const fileStream = fs.createReadStream(this.#filename);
 
-    const rl = readline.createInterface({
-      input: fileStream,
-      crlfDelay: Infinity,
-    });
+      const rl = readline.createInterface({
+        input: fileStream,
+        crlfDelay: Infinity,
+      });
 
-    for await (const line of rl) {
-      // console.log(line);
-      this.tokenizeLine(line);
+      for await (const line of rl) {
+        // console.log(line);
+        this.tokenizeLine(line);
+      }
+    } catch (e) {
+      stdout.error(e.message);
+      return e.message;
     }
-
     return this.#tokenList;
   }
 
