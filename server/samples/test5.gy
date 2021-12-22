@@ -4,7 +4,6 @@ var total = 0,temp = 0
 
 branch("start"){
     send("你好,我是机器人——小吃，有什么可以帮到你的吗？\n")
-    send("如果您长时间未回应，我会临时断开连接")
     send("以下命令，您可输入数字，也可输入关键字")
     send("1是订单，2是评价\投诉，3是退出")
     listen(20,reply)
@@ -94,17 +93,9 @@ branch("snacks"){
     }
 }
 
-branch("feedback"){
-    send("若您有任何意见或看法，请告知我们。")
-    listen(20,reply)
-    detect(reply){
-        match("","exit")
-    }
-    send("已经收到您的建议，感谢您的合作。")
-    goto("start")
-}
-
 branch("exit"){
-    send("欢迎下次光临！${bye}")
+    send("总价为${total}, 欢迎下次光临！${bye}")
+    total = total + (1 + 3)*5
+    send("机器人运算结果：${total}")
     exit()
 }
