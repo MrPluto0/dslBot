@@ -132,7 +132,7 @@ class Parser {
           ErrorProcess.VariableDeclaration.checkInit(last);
           last.init = {
             source: 'inner',
-            type: 'Number',
+            type: 'Numeric',
             value: symbol.value,
           };
           break;

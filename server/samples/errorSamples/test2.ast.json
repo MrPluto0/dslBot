@@ -1,1 +1,0 @@
-{"type":"Script","body":[{"type":"Function","name":"detect","params":[],"block":[{"type":"Function","name":"match","params":[{"value":"1|2|3","type":"String"}]},{"type":"Function","name":"match","params":[{"value":"","type":"String"}]}]}]}

@@ -1,1 +1,0 @@
-{"type":"Script","body":[{"type":"Function","name":"goto","params":[{"value":"123","type":"String"}]},{"type":"BranchEvent","name":{"value":"123","type":"String"},"block":[{"type":"Function","name":"goto","params":[{"value":"exiter","type":"String"}]}]},{"type":"BranchEvent","name":{"value":"exit","type":"String"},"block":[]}]}

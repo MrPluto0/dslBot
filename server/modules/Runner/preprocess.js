@@ -37,11 +37,12 @@ class PreProcessor {
           if ('init' in variable) {
             temp.value = variable.init.value;
             temp.type = variable.init.type;
-            if (temp.type === 'Number') { temp.value = parseInt(temp.value, 10); }
+            if (temp.type === 'Numeric') { temp.value = parseInt(temp.value, 10); }
           }
           // if variable's value from outer
           if (variable.init?.source === 'outer') {
             temp.value = this.#outer[variable.name];
+            if (typeof temp.value === 'number') { temp.type = 'Numeric'; } else if (typeof temp.value === 'string') { temp.type = 'String'; }
           }
           this._Variable.push(temp);
           varLen += 1;

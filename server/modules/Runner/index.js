@@ -351,8 +351,12 @@ class Runner extends PreProcessor {
   searchVariable(name) {
     for (const va of this._Variable) {
       if (va.name === name) {
-        if (va.value !== undefined) return va;
-        ErrorProcess.EmptyVariable(va.name);
+        if (va.value === undefined) {
+          ErrorProcess.EmptyVariable(va.name);
+        } else if (va.type === 'Numeric') {
+          va.value = parseInt(va.value, 10);
+        }
+        return va;
       }
     }
     ErrorProcess.NotFoundVariable(name);

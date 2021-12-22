@@ -7,8 +7,9 @@
   "scripts": {
     "start": "node app.js",
     "test": "mocha --timeout 5000",
-    "unit": "mocha --recursive --timeout 5000",
+    "unit": "mocha ./test/*.spec.js --recursive --timeout 5000",
     "coverage": "nyc npm run unit",
+    "integrate": "nyc npm run test ./test/integration.spec.js",
     "jsdoc": "jsdoc -r -c doc/conf.json -R doc/HOMEPAGE.md"
   },
   "repository": {

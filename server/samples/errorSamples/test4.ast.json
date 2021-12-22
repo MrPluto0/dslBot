@@ -1,1 +1,0 @@
-{"type":"Script","body":[{"type":"VariableDeclaration","declarations":[{"name":"reply"}]},{"type":"Function","name":"detect","params":[{"value":"reply","type":"Identifier"}],"block":[{"type":"Function","name":"match","params":[]}]}]}
