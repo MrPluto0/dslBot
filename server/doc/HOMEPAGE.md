@@ -12,6 +12,8 @@
 
 ## 概要设计
 
+> 注：同目录下的**`/server/doc/doc-page/index.html`**中包含着对服务端的注释文档，属于本文档的超集，可移步其查阅相关内容。
+
 本程序开发的解释器以 NodeJs 为核心语言，模仿 Java 设计，对设计的 DSL 进行编译解析（Tokenize，Parse）生成 AST，再对其分析执行。
 
 1. 借助 WebSocket 完成服务端与客户端的全双工通信（TCP）。
@@ -21,7 +23,7 @@
 
 ## 架构图
 
-![架构](D:\Document\Codes\Projects\dsl-interpreter\img\架构.png)
+![架构](http://10.112.112.240:8081/2019211400/dslbot/-/blob/master/img/架构.png)
 
 ## DSL 设计
 
@@ -403,7 +405,7 @@ ws.onopen = (res) => {
 
 由于服务端 webSocketServer 监听连接的建立，因此具备多线程，多用户的能力，其通信流程图如下：
 
-<img src="D:\Document\Codes\Projects\dsl-interpreter\img\socket.png" alt="socket" style="zoom:80%;margin-left:0" />
+<img src="img\socket.png" alt="socket" style="zoom:80%;margin-left:0" />
 
 而在脚本文件设计的对应通信函数为`send(msg)`和`listen(seconds,event)`。
 
@@ -432,7 +434,7 @@ ws.onopen = (res) => {
 
   注意：当前 token 检测达到结束时，最后一个符号是否需要计入 token 中，此处通过 state 为 99 和 100 来区分，并分别处理。
 
-  <img src="D:\Document\Codes\Projects\dsl-interpreter\img\state.png" alt="state" style="margin-left:0" />
+  <img src="img\state.png" alt="state" style="margin-left:0" />
 
 - 语法树 AST
 
@@ -462,8 +464,9 @@ ws.onopen = (res) => {
 
 1. 日期函数，获取当天年月日，或时分的表达式。
 2. 日志函数，用以配置日志的记录。
-3. 睡眠函数，借助 Promise 封装阻塞函数。
+3. 睡眠函数，借助 `Promise` 封装阻塞函数。
 4. 栈结构，具备栈的操作，在该程序中主要用于操作作用域。
+5. 加密系统，采用**RSA**非对称加密，通过**openssl**生成公钥和私钥。
 
 ### 模块划分—客户端
 
@@ -533,23 +536,28 @@ WebSocket 通信接口中，在消息传送的基础上进行了 JSON 格式封�
 
 主要在于 Electron 的客户端进行人机操作。
 
-1. 左侧**小吃**机器人和**走马观花**为目前的聊天用户，点击即可基于后台 DSL 脚本进行人机对话。
+1. 左侧**小吃**机器人和**走马观花**为目前的聊天用户，点击即可基于后台 DSL 脚本进行人机对话。(对应`test.gy`,`test4.gy`脚本文件)
 
-2. 在输入框中可与机器人进行交流，机器人默认响应 20s，超时即会暂时退出。
-3. 采用字符检测算法，每次通信可以输入响应的关键词或者对应的数字，二者均有效。
-4. 右上角垃圾箱，可清除当前消息列表。
+2. 在客户端主页能够选择登录用户`Gypsophlia`或`pluto`，目前仅设置两个。
+3. 在输入框中可与机器人进行交流，机器人默认响应 20s，超时即会暂时退出。
+4. 采用字符检测算法，每次通信可以输入响应的关键词或者对应的数字，二者均有效。
+5. 右上角垃圾箱，可清除当前消息列表。
 
 <img src="./img/client.png" alt="image-20211219002935557" style="zoom:80%;margin-left:0" />
 
 ## 测试
 
-测试部分注意使用**Mocha**测试框架和**Chai**断言库来实现。
+测试部分注意使用**Mocha**测试框架和**Chai**断言库来实现，采用 BDD 模式，进行单元测试。另外，包含一个集成测试文件。
+
+其中单元测试的覆盖率约 73%，集成测试的覆盖率约 81%，二者结合的覆盖率约 85%。
 
 该部分文件主要在`/test/*.spec.js`中。
 
 ### 测试桩
 
-测试桩根据模块主要划分为五类，包括对解析模块，运行模块，通信模块，工具模块的测试：
+测试桩根据模块主要划分为五类，包括对分词模块，解析模块，运行模块，通信模块，工具模块的测试：
+
+#### 单元测试
 
 - ws 测试
 
@@ -557,32 +565,46 @@ WebSocket 通信接口中，在消息传送的基础上进行了 JSON 格式封�
 
 - token 测试
 
-  编写`test1.gy`，`test2.gy`，`test3.gy`文件，测试其生成的 token 分词的正确性，包括对变量声明，函数运行与作用域嵌套，四则运算的测试。
+  编写`test1-3.gy`文件，测试其生成的 token 分词的正确性，包括对变量声明，函数运行与作用域嵌套，四则运算的测试。
 
 - parse 测试
 
-  分别对 token 中的三个文件生成的 token 分词文件`testX.token.json`进行解析，测试解析过程中的正确性。
-
-- run 测试
-
-  分别对 parse 中的三个文件进行测试，借助 ws 模块，以检验运行过程是否正确。
+  分别对 token 中的三个文件生成的 token 分词文件`test*.token.json`进行解析，测试解析过程中的正确性。其中按顺序检验：变量声明解析测试，四则运算解析测试，作用域划分测试
 
 - utils 测试
 
   工具类测试，包括日期生成是否正确，睡眠函数封装是否正确，日志写入的测试。
 
+- run 测试
+
+  根据 errorSamples 中`test1-5.gy`来检测运行 AST 过程中可出现的错误。
+
+#### 集成功能测试
+
+集成测试文件为`integration.spec.js`，使用 Tokenizer,Parser,Runner 模块，借助 ws 通信，运行`test.gy`，模拟人机交互，以检验运行过程是否正确。
+
 ### 测试运行
 
-一次性测试全部文件
+单元测试命令
 
 ```
 // shell
 npm run unit
+
+// show covarage
+npm run coverage
+```
+
+集成测试命令
+
+```
+// shell
+npm run integrate
 ```
 
 测试某个文件
 
 ```
-// shell
-npm test ./test/xxx.spec.js
+//shell
+npm run test test ./test/xxx.spec.js
 ```

@@ -57,6 +57,9 @@
 <p>本程序将模拟如下一个客服机器人场景：</p>
 <p>某家餐厅在长久的经营下，营造了良好的口碑，每天三个时间段均门庭若市，为了区别其它订餐方式，商家决定不使用普通的订餐软件，而增设自己的订餐机器人，能够使得客户提前预约与订购事物，在此基础上的长远发展是，机器人可以为其自动排号，通知客户烹饪时间，就餐时间等，如此一来，节约了众多人力成本，也方便了客户。</p>
 <h2>概要设计</h2>
+<blockquote>
+<p>注：同目录下的**<code>/server/doc/doc-page/index.html</code>**中包含着对服务端的注释文档，属于本文档的超集，可移步其查阅相关内容。</p>
+</blockquote>
 <p>本程序开发的解释器以 NodeJs 为核心语言，模仿 Java 设计，对设计的 DSL 进行编译解析（Tokenize，Parse）生成 AST，再对其分析执行。</p>
 <ol>
 <li>借助 WebSocket 完成服务端与客户端的全双工通信（TCP）。</li>
@@ -65,7 +68,7 @@
 <li>借助 Log4js 来完成日志记录。</li>
 </ol>
 <h2>架构图</h2>
-<p><img src="D:%5CDocument%5CCodes%5CProjects%5Cdsl-interpreter%5Cimg%5C%E6%9E%B6%E6%9E%84.png" alt="架构"></p>
+<p><img src="http://10.112.112.240:8081/2019211400/dslbot/-/blob/master/img/%E6%9E%B6%E6%9E%84.png" alt="架构"></p>
 <h2>DSL 设计</h2>
 <p>客服机器人的 DSL 应该具备基本的开始与结束标识，整数与字符串变量类型，循环和判断逻辑，回复，监听，中断等。</p>
 <h3>例子</h3>
@@ -408,7 +411,7 @@ ws.onopen = (res) => {
 </code></pre>
 <p>在建立后，二者即可进行通信，通过<code>ws.send()</code>来发送消息，通过<code>ws.on(&quot;message&quot;,(res)=&gt;{})</code>或者<code>ws.onmessage</code>来监听并接收消息。</p>
 <p>由于服务端 webSocketServer 监听连接的建立，因此具备多线程，多用户的能力，其通信流程图如下：</p>
-<img src="D:\Document\Codes\Projects\dsl-interpreter\img\socket.png" alt="socket" style="zoom:80%;margin-left:0" />
+<img src="img\socket.png" alt="socket" style="zoom:80%;margin-left:0" />
 <p>而在脚本文件设计的对应通信函数为<code>send(msg)</code>和<code>listen(seconds,event)</code>。</p>
 <p><strong>关键点</strong>：其中<code>send</code>的内部实现即可调用<code>ws.send()</code>；但是<code>listen</code>的实现由于需要等待指定的秒数，且在等待过程中，需要将进程阻塞，不能简单的使用<code>sleep</code>（JS 中阻塞可通过异步 Promise 模块实现）来阻塞，因为阻塞时进程不会执行任何函数，于是此处需要使用一点技巧，可以将<code>seconds</code>分为多个时间片，每个时间片内阻塞，每个时间片结束则判断是否接受到消息，在所有时间片结束后仍未收到消息，即可退出程序。</p>
 <h4>日志模块</h4>
@@ -425,7 +428,7 @@ ws.onopen = (res) => {
 <p>分词 Token</p>
 <p>步骤：按行从文件中取出数据并根据状态转移图和已划分的关键字来完成，关键在于对状态的准确划分与错误的处理。其中为 Tokenizer 类定义了 Judge 基类，用以判断一些符号所属的类型（KeyWord，Identity…）。</p>
 <p>注意：当前 token 检测达到结束时，最后一个符号是否需要计入 token 中，此处通过 state 为 99 和 100 来区分，并分别处理。</p>
-<img src="D:\Document\Codes\Projects\dsl-interpreter\img\state.png" alt="state" style="margin-left:0" />
+<img src="img\state.png" alt="state" style="margin-left:0" />
 </li>
 <li>
 <p>语法树 AST</p>
@@ -457,8 +460,9 @@ ws.onopen = (res) => {
 <ol>
 <li>日期函数，获取当天年月日，或时分的表达式。</li>
 <li>日志函数，用以配置日志的记录。</li>
-<li>睡眠函数，借助 Promise 封装阻塞函数。</li>
+<li>睡眠函数，借助 <code>Promise</code> 封装阻塞函数。</li>
 <li>栈结构，具备栈的操作，在该程序中主要用于操作作用域。</li>
+<li>加密系统，采用<strong>RSA</strong>非对称加密，通过<strong>openssl</strong>生成公钥和私钥。</li>
 </ol>
 <h3>模块划分—客户端</h3>
 <h4>通信模块</h4>
@@ -527,7 +531,10 @@ ws.onopen = (res) => {
 <p>主要在于 Electron 的客户端进行人机操作。</p>
 <ol>
 <li>
-<p>左侧<strong>小吃</strong>机器人和<strong>走马观花</strong>为目前的聊天用户，点击即可基于后台 DSL 脚本进行人机对话。</p>
+<p>左侧<strong>小吃</strong>机器人和<strong>走马观花</strong>为目前的聊天用户，点击即可基于后台 DSL 脚本进行人机对话。(对应<code>test.gy</code>,<code>test4.gy</code>脚本文件)</p>
+</li>
+<li>
+<p>在客户端主页能够选择登录用户<code>Gypsophlia</code>或<code>pluto</code>，目前仅设置两个。</p>
 </li>
 <li>
 <p>在输入框中可与机器人进行交流，机器人默认响应 20s，超时即会暂时退出。</p>
@@ -541,10 +548,12 @@ ws.onopen = (res) => {
 </ol>
 <img src="./img/client.png" alt="image-20211219002935557" style="zoom:80%;margin-left:0" />
 <h2>测试</h2>
-<p>测试部分注意使用<strong>Mocha</strong>测试框架和<strong>Chai</strong>断言库来实现。</p>
+<p>测试部分注意使用<strong>Mocha</strong>测试框架和<strong>Chai</strong>断言库来实现，采用 BDD 模式，进行单元测试。另外，包含一个集成测试文件。</p>
+<p>其中单元测试的覆盖率约 73%，集成测试的覆盖率约 81%，二者结合的覆盖率约 85%。</p>
 <p>该部分文件主要在<code>/test/*.spec.js</code>中。</p>
 <h3>测试桩</h3>
-<p>测试桩根据模块主要划分为五类，包括对解析模块，运行模块，通信模块，工具模块的测试：</p>
+<p>测试桩根据模块主要划分为五类，包括对分词模块，解析模块，运行模块，通信模块，工具模块的测试：</p>
+<h4>单元测试</h4>
 <ul>
 <li>
 <p>ws 测试</p>
@@ -552,29 +561,38 @@ ws.onopen = (res) => {
 </li>
 <li>
 <p>token 测试</p>
-<p>编写<code>test1.gy</code>，<code>test2.gy</code>，<code>test3.gy</code>文件，测试其生成的 token 分词的正确性，包括对变量声明，函数运行与作用域嵌套，四则运算的测试。</p>
+<p>编写<code>test1-3.gy</code>文件，测试其生成的 token 分词的正确性，包括对变量声明，函数运行与作用域嵌套，四则运算的测试。</p>
 </li>
 <li>
 <p>parse 测试</p>
-<p>分别对 token 中的三个文件生成的 token 分词文件<code>testX.token.json</code>进行解析，测试解析过程中的正确性。</p>
-</li>
-<li>
-<p>run 测试</p>
-<p>分别对 parse 中的三个文件进行测试，借助 ws 模块，以检验运行过程是否正确。</p>
+<p>分别对 token 中的三个文件生成的 token 分词文件<code>test*.token.json</code>进行解析，测试解析过程中的正确性。其中按顺序检验：变量声明解析测试，四则运算解析测试，作用域划分测试</p>
 </li>
 <li>
 <p>utils 测试</p>
 <p>工具类测试，包括日期生成是否正确，睡眠函数封装是否正确，日志写入的测试。</p>
 </li>
+<li>
+<p>run 测试</p>
+<p>根据 errorSamples 中<code>test1-5.gy</code>来检测运行 AST 过程中可出现的错误。</p>
+</li>
 </ul>
+<h4>集成功能测试</h4>
+<p>集成测试文件为<code>integration.spec.js</code>，使用 Tokenizer,Parser,Runner 模块，借助 ws 通信，运行<code>test.gy</code>，模拟人机交互，以检验运行过程是否正确。</p>
 <h3>测试运行</h3>
-<p>一次性测试全部文件</p>
+<p>单元测试命令</p>
 <pre class="prettyprint source"><code>// shell
 npm run unit
+
+// show covarage
+npm run coverage
+</code></pre>
+<p>集成测试命令</p>
+<pre class="prettyprint source"><code>// shell
+npm run integrate
 </code></pre>
 <p>测试某个文件</p>
-<pre class="prettyprint source"><code>// shell
-npm test ./test/xxx.spec.js
+<pre class="prettyprint source"><code>//shell
+npm run test test ./test/xxx.spec.js
 </code></pre></article>
     </section>
 
@@ -588,7 +606,7 @@ npm test ./test/xxx.spec.js
 <br class="clear">
 
 <footer>
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Wed Dec 22 2021 23:43:08 GMT+0800 (GMT+08:00) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.7</a> on Thu Dec 23 2021 13:11:21 GMT+0800 (GMT+08:00) using the Minami theme.
 </footer>
 
 <script>prettyPrint();</script>

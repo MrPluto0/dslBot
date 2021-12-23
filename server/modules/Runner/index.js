@@ -287,7 +287,9 @@ class Runner extends PreProcessor {
    */
   async runDetect(params, block) {
     let detector = params[0];
-    if (detector === undefined) { ErrorProcess.NotFoundDetect(); }
+    if (detector === undefined) {
+      ErrorProcess.NotFoundDetect();
+    }
 
     if (detector?.type === 'Identifier') {
       detector = this.searchVariable(detector.value);

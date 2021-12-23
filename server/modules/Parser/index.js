@@ -221,7 +221,13 @@ class Parser {
         case 'DIV':
           if (turn === 1) {
             while (tempStack.top() && tempStack.top().type === 'LeftParen') {
-              if ('ADD|SUB'.includes(symbol.type) && 'ADD|SUB|MUL|DIV'.includes(tempStack.top().type)) { operateStack.push(tempStack.pop()); } else if ('MUL|DIV'.includes(symbol.type) && 'MUL|DIV'.includes(tempStack.top().type)) { operateStack.push(tempStack.pop()); } else { break; }
+              if ('ADD|SUB'.includes(symbol.type) && 'ADD|SUB|MUL|DIV'.includes(tempStack.top().type)) {
+                operateStack.push(tempStack.pop());
+              } else if ('MUL|DIV'.includes(symbol.type) && 'MUL|DIV'.includes(tempStack.top().type)) {
+                operateStack.push(tempStack.pop());
+              } else {
+                break;
+              }
             }
             tempStack.push(symbol);
             turn = 0;
